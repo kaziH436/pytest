@@ -2,7 +2,7 @@ from fixtures.mydb import MyDB
 
 import pytest
 
-@pytest.fixture(scope="module") # replaces setup and tear down
+@pytest.fixture(scope="module") # replaces setup and tear down (clean up)
 def cur():
     print("setting up")
     db = MyDB()
@@ -13,7 +13,7 @@ def cur():
     conn.close()
     print("closing DB")
 
-def test_johns_id(cur):
+def test_johns_id(cur): # dependency injection
     id = cur.execute("select id from employee_db where name=John")
     assert id == 123
 
